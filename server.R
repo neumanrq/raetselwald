@@ -35,11 +35,11 @@ shinyServer(function(input, output, session) {
     answer = input$answer
 
     if (answer == '') {
-      "Naaa... weißt du es? Versuche die Aufgabe zu lösen."
+      "Schuuhuu! Naaa... weißt du es?"
     } else if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult)) {
-      "Super, das ist richtig! 👍"
+      "Schuhuuuuu! Super, das ist richtig! 👍"
     } else {
-      "Hm... da musst du nochmal überlegen 🤔"
+      "*Grummel* Hm... da musst du nochmal überlegen 🤔"
     }
   })
 

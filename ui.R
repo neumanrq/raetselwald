@@ -8,7 +8,11 @@ shinyUI(
 
     fluidRow(
       column(12,
-        h1(textOutput("response"), align = "center")
+        tags$div(class = "owl", "🦉"),
+        tags$div(class = "messages",
+          textOutput("response")
+        ),
+        tags$div(class = "wood", "🌲🌲🌲🌲")
       ),
       column(12,
         tags$div(class="equation-container", checked=NA,
@@ -21,9 +25,12 @@ shinyUI(
       column(12,
         tags$div(class="button-container",
           list(
-            actionButton("go", "⏩ Nächste Aufgabe stellen")
+            actionButton("go", "Nächste Aufgabe stellen")
           )
         )
+      ),
+      column(12,
+        tags$div(class = "wood", "🌲🌲🌲🌲")
       )
     )
   )

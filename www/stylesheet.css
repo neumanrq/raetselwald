@@ -1,5 +1,42 @@
 body {
-  padding-top: 100px;
+  padding-top: 10px;
+  background-color: #A7C012;
+  color: white;
+}
+
+.btn {
+  border: 6px solid #8D4516;
+  border-radius: 10px;
+  background-color: #C2680D;
+  color: white;
+}
+
+.tree {
+  width: 20px;
+  font-size: 80px;
+  float: left;
+}
+
+.wood {
+  width: 400px;
+  margin: 0 auto;
+  font-size: 100px;
+}
+
+.owl {
+  font-size: 78px;
+  float: left;
+}
+
+.messages {
+  margin-left: 100px; 
+  padding: 15px;
+  font-size: 36px;
+  border: 6px solid #8D4516;
+  border-radius: 10px;
+  background-color: #C2680D;
+  color: white;
+  width: 600px;
 }
 
 #equation {
