@@ -9,13 +9,18 @@ shinyUI(
     fluidRow(
       column(12,
         tags$div(class = "owl", "🦉"),
+        tags$div(class = "branch"),
+        tags$div(class = "tree-top"),
+        tags$div(class = "tree-top-2"),
+        tags$div(class = "tree"),
+        tags$div(class = "tree-2"),
         tags$div(class = "messages",
           textOutput("response")
         ),
-        tags$div(class = "wood", "🌲🌲🌲🌲")
+        tags$div(class = "soil")
       ),
       column(12,
-        tags$div(class="equation-container", checked=NA,
+        tags$div(class="equation-container",
           list(
             textOutput("equation"),
             textInput("answer", label = NULL)
@@ -25,12 +30,9 @@ shinyUI(
       column(12,
         tags$div(class="button-container",
           list(
-            actionButton("go", "Nächste Aufgabe stellen")
+            actionLink("go", "Nächste Aufgabe stellen!")
           )
         )
-      ),
-      column(12,
-        tags$div(class = "wood", "🌲🌲🌲🌲")
       )
     )
   )
