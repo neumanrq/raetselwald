@@ -34,7 +34,7 @@ shinyServer(function(input, output, session) {
     answer = input$answer
 
     if (answer == '') {
-      "Naaa... weißt du es?"
+      "Naaa... weißt du es? Versuche die Aufgabe zu lösen."
     } else if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult)) {
       "Super, das ist korrekt 👍"
     } else {

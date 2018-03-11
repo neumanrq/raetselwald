@@ -1,0 +1,28 @@
+body {
+  padding-top: 100px;
+}
+
+#equation {
+  font-size: 32px;
+  float: left;
+  margin: 15px;
+}
+
+.equation-container {
+  padding-top: 50px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.button-container {
+  width: 250px;
+  padding-top: 50px;
+  margin: 0 auto;
+}
+
+#answer {
+  margin-left: 5px;
+  font-size: 32px;
+  width: 80px;
+  margin-top: 20px;
+} 

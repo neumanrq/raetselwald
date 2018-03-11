@@ -2,23 +2,27 @@ library(shiny)
 
 shinyUI(
   fluidPage(
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css")
+    ),
+
     fluidRow(
       column(12,
-        column(4,
-          titlePanel('Hallo 👋')
+        h1(textOutput("response"), align = "center")
+      ),
+      column(12,
+        tags$div(class="equation-container", checked=NA,
+          list(
+            textOutput("equation"),
+            textInput("answer", label = NULL)
+          )
         )
       ),
-
       column(12,
-        br(),
-        column(12,
-          column(12, h1(textOutput("equation"))),
-          column(2, textInput("answer", label = NULL)),
-          column(1, actionButton("go", "Nächste Aufgabe"))
-        ),
-
-        column(12,
-          h1(textOutput("response"))
+        tags$div(class="button-container",
+          list(
+            actionButton("go", "⏩ Nächste Aufgabe stellen")
+          )
         )
       )
     )
