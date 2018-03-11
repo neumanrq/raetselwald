@@ -27,7 +27,7 @@ shinyServer(function(input, output, session) {
 
   output$equation <- renderText({
     paste(
-      toString(currentExercise$a), " ∙ ", toString(currentExercise$b), " = "
+      toString(currentExercise$a), " * ", toString(currentExercise$b), " = "
     )
   })
 
@@ -37,9 +37,9 @@ shinyServer(function(input, output, session) {
     if (answer == '') {
       "Schuuhuu! Naaa... weißt du es?"
     } else if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult)) {
-      "Schuhuuuuu! Super, das ist richtig! 👍"
+      "Schuhuuuuu! Super, das ist richtig!"
     } else {
-      "*Grummel* Hm... da musst du nochmal überlegen 🤔"
+      "*Grummel* Hm... da musst du nochmal überlegen"
     }
   })
 
