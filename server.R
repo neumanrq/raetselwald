@@ -16,6 +16,7 @@ shinyServer(function(input, output, session) {
     currentExercise$a <- newExercise$a
     currentExercise$b <- newExercise$b
     currentExercise$expectedResult <- newExercise$expectedResult
+    updateTextInput(session, "answer", value = "")
   })
 
   currentExercise <- reactiveValues(
@@ -36,7 +37,7 @@ shinyServer(function(input, output, session) {
     if (answer == '') {
       "Naaa... weißt du es? Versuche die Aufgabe zu lösen."
     } else if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult)) {
-      "Super, das ist korrekt 👍"
+      "Super, das ist richtig! 👍"
     } else {
       "Hm... da musst du nochmal überlegen 🤔"
     }
