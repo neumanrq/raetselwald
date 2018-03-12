@@ -5,12 +5,12 @@ body {
 }
 
 .soil {
-  position: absolute;
-  top: 600px;
+  position: fixed;
+  top: 70%;
   left: -10px;
   background: #04B404;
-  width: 110%;
-  height: 200px;
+  width: 120%;
+  height: 30%;
   overflow: hidden;
 }
 
@@ -22,20 +22,21 @@ body {
 }
 
 .branch {
-  position: absolute;
-  top: 311px;
+  position: fixed;
+  top: 110px;
   left: -10px;
-  width: 200px;
-  height: 14px;
+  width: 160px;
+  height: 16px;
   border: 8px solid #8D4516;
   border-radius: 10px;
   background-color: #C2680D;
   color: white;
-  z-index: 2;
+  z-index: 200;
+  transform: rotate(-4deg);
 }
 
 .tree-top-2 {
-  position: absolute;
+  position: fixed;
   top: -90px;
   left: -150px;
   width: 360px;
@@ -46,6 +47,7 @@ body {
   z-index: 4;
   overflow: hidden;
 }
+
 .tree-top {
   position: absolute;
   top: -50px;
@@ -60,11 +62,11 @@ body {
 }
 
 .tree {
-  position: absolute;
+  position: fixed;
   top: 100px;
   left: 0px;
   width: 60px;
-  height: 600px;
+  height: 100%;
   border: 8px solid #8D4516;
   border-radius: 10px;
   background-color: #8D4516;
@@ -90,21 +92,21 @@ body {
 .owl {
   font-size: 78px;
   float: left;
-  position: absolute;
-  top: 225px;
-  left: 100px;
-  z-index: 3;
+  position: fixed;
+  top: 30px;
+  left: 20px;
+  z-index: 201;
 }
 
 .messages {
-  position: absolute;
-  top: 225px;
-  background-color: #C2680D;
-  margin-left: 180px; 
+  position: fixed;
+  top: 35px;
+  left: 100px;
+  color: black;
   padding: 15px;
   font-size: 24px;
   border-radius: 10px;
-  color: white;
+  background-color: white;
   width: 400px;
   z-index: 10;
 }
@@ -112,12 +114,12 @@ body {
 .messages:after {
 	content: '';
 	position: absolute;
-	left: 0;
-	top: 50%;
+	left: 10px;
+	top: 30px;
 	width: 0;
 	height: 0;
-	border: 20px solid transparent;
-	border-right-color: #C2680D;
+	border: 16px solid transparent;
+	border-right-color: white;
 	border-left: 0;
 	margin-top: -20px;
 	margin-left: -20px;
@@ -126,19 +128,29 @@ body {
 #equation {
   font-size: 48px;
   float: left;
-  margin: 15px;
+  margin: 10px;
 }
 
 .equation-container {
-  padding-top: 50px;
+  margin: 20px;
   width: 300px;
   margin: 0 auto;
+  z-index: 1000;
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  background-color: white;
+  opacity: 0.85;
+  color: black;
+  border-radius: 10px;
 }
 
+.button-container {
+  position: fixed; 
+  bottom: 10%;
+  right: 10%;
+}
 .action-button {
-  position: absolute;
-  top: 300px;
-  left: 300px;
   z-index: 15;
   color: white;
   font-size: 28px;
