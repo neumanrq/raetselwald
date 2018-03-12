@@ -12,6 +12,7 @@ body {
   width: 120%;
   height: 30%;
   overflow: hidden;
+  z-index: 2;
 }
 
 .btn {
@@ -49,7 +50,7 @@ body {
 }
 
 .tree-top {
-  position: absolute;
+  position: fixed;
   top: -50px;
   left: -100px;
   width: 500px;
@@ -71,7 +72,7 @@ body {
   border-radius: 10px;
   background-color: #8D4516;
   color: white;
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;
 }
 
