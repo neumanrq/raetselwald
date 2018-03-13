@@ -77,11 +77,11 @@ body {
 }
 
 .tree-2 {
-  position: absolute;
+  position: fixed;
   top: 380px;
   left: 90px;
   width: 100px;
-  height: 400px;
+  height: 100%;
   border: 8px solid #9B5602;
   border-radius: 10px;
   background-color: #9B5602;
