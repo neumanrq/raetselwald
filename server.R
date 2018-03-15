@@ -1,7 +1,7 @@
 library(shiny)
 
 new.exercise = function(env) {
-  env = new.env()
+  env   <- new.env()
   env$a <- sample(1:10, 1)
   env$b <- sample(1:10, 1)
   env$expectedResult <- env$a * env$b
