@@ -138,11 +138,24 @@ body {
   margin: 0 auto;
   z-index: 1000;
   position: fixed;
-  top: 30%;
-  left: 30%;
+  top: 40%;
+  left: 40%;
   background-color: white;
   opacity: 0.85;
   color: black;
+  border-radius: 10px;
+}
+
+.score-container {
+  margin: 20px;
+  font-size: 4em;
+  width: 300px;
+  margin: 0 auto;
+  z-index: 4001;
+  position: fixed;
+  top: 4%;
+  right: 0%;
+  color: white;
   border-radius: 10px;
 }
 

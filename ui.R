@@ -25,6 +25,9 @@ shinyUI(
             textOutput("equation"),
             textInput("answer", label = NULL)
           )
+        ),
+        tags$div(class = "score-container",
+          textOutput("score")
         )
       ),
       column(12,
