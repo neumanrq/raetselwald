@@ -1,4 +1,4 @@
-additional_packages = c("shiny")
+additional_packages = c("shiny", "magrittr")
 
 install_if_missing = function(p) {
   if (p %in% rownames(installed.packages()) == FALSE) {
