@@ -1,12 +1,25 @@
 library(shiny)
+library(magrittr)
 
 new.exercise = function(env) {
-  env <- new.env()
-  env$a <- sample(1:10, 1)
-  env$b <- sample(1:10, 1)
+  env                <- new.env()
+  env$a              <- sample(1:10, 1)
+  env$b              <- sample(1:10, 1)
   env$expectedResult <- env$a * env$b
-  env$answered <- FALSE
+  env$solved         <- FALSE
   env
+}
+
+feedback.for <- function(answer, currentExercise) {
+  if ((answer == '') && (currentExercise$solved == FALSE)) {
+    "Schuuhuu! Naaa... weißt du es?"
+  } else if ((answer != '') && (currentExercise$solved == FALSE)) {
+    "Hhhhm… da stimmt was noch nicht! Du kommst bestimmt gleich drauf."
+  } else if (currentExercise$solved == TRUE) {
+    "Schuhuuuuu! Super, das ist richtig!"
+  } else {
+    "Schuuuhhuuu!"
+  }
 }
 
 shinyServer(function(input, output, session) {
@@ -18,16 +31,16 @@ shinyServer(function(input, output, session) {
     currentExercise$a              <- newExercise$a
     currentExercise$b              <- newExercise$b
     currentExercise$expectedResult <- newExercise$expectedResult
-    currentExercise$answered       <- newExercise$answered
+    currentExercise$solved       <- newExercise$solved
 
-    updateTextInput(session, "answer", value = "")
+    session %>% updateTextInput("answer", value = "")
   })
 
   currentExercise <- reactiveValues(
     a              = exercise$a,
     b              = exercise$b,
     expectedResult = exercise$expectedResult,
-    answered       = FALSE
+    solved         = FALSE
   )
 
   score <- reactiveValues(
@@ -35,11 +48,11 @@ shinyServer(function(input, output, session) {
   )
 
   observeEvent(input$answer, {
-    answer = input$answer
+    answer <- input$answer
 
-    if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult) && (currentExercise$answered == FALSE)) {
-      score$total <- score$total + 1
-      currentExercise$answered <- TRUE
+    if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult) && (currentExercise$solved == FALSE)) {
+      score$total            <- score$total + 1
+      currentExercise$solved <- TRUE
     }
   })
 
@@ -49,26 +62,13 @@ shinyServer(function(input, output, session) {
     )
   })
 
-
   output$response <- renderText({
-    answer = input$answer
-
-    feedback <- if ((answer == '') && (currentExercise$answered == FALSE)) {
-      "Schuuhuu! Naaa... weißt du es?"
-    } else if ((answer != '') && (currentExercise$answered == FALSE)) {
-      "Hhhhm… da stimmt was noch nicht! Du kommst bestimmt gleich drauf."
-    } else if (currentExercise$answered == TRUE) {
-      "Schuhuuuuu! Super, das ist richtig!"
-    } else {
-      "Schuuuhhuuu!"
-    }
-
-    feedback
+    input$answer %>% feedback.for(currentExercise)
   })
 
   output$score <- renderText({
     paste(
-      toString(score$total), " Punkte"
+      toString(score$total), " Punkt(e)"
     )
   })
 
