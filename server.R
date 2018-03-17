@@ -14,10 +14,12 @@ shinyServer(function(input, output, session) {
 
   observeEvent(input$go, {
     newExercise <- new.exercise()
-    currentExercise$a <- newExercise$a
-    currentExercise$b <- newExercise$b
+
+    currentExercise$a              <- newExercise$a
+    currentExercise$b              <- newExercise$b
     currentExercise$expectedResult <- newExercise$expectedResult
-    currentExercise$answered <- FALSE
+    currentExercise$answered       <- newExercise$answered
+
     updateTextInput(session, "answer", value = "")
   })
 
