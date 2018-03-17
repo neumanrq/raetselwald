@@ -3,10 +3,36 @@ library(magrittr)
 
 new.exercise = function(env) {
   env                <- new.env()
-  env$a              <- sample(1:10, 1)
-  env$b              <- sample(1:10, 1)
-  env$expectedResult <- env$a * env$b
+  env$x              <- sample(1:10, 1)
+  env$y              <- sample(1:10, 1)
+  env$z              <- env$x * env$y
+  env$expectedResult <- sample(c(env$x, env$y, env$z))[1]
   env$solved         <- FALSE
+
+  env$equation.first <- if (env$expectedResult == env$z) {
+    env$x
+  } else if (env$expectedResult == env$x) {
+    env$z
+  } else if (env$expectedResult == env$y) {
+    env$y
+  }
+
+  env$equation.second <- if (env$expectedResult == env$z) {
+    env$y
+  } else if (env$expectedResult == env$x) {
+    env$y
+  } else if (env$expectedResult == env$y) {
+    env$x
+  }
+
+  env$operator <- if (env$expectedResult == env$z) {
+    " ∙ "
+  } else if (env$expectedResult == env$x) {
+    " : "
+  } else if (env$expectedResult == env$y) {
+    " : "
+  }
+
   env
 }
 
@@ -31,7 +57,8 @@ shinyServer(function(input, output, session) {
     currentExercise$a              <- newExercise$a
     currentExercise$b              <- newExercise$b
     currentExercise$expectedResult <- newExercise$expectedResult
-    currentExercise$solved       <- newExercise$solved
+    currentExercise$solved         <- newExercise$solved
+    currentExercise$operator       <- newExercise$operator
 
     session %>% updateTextInput("answer", value = "")
   })
@@ -40,6 +67,7 @@ shinyServer(function(input, output, session) {
     a              = exercise$a,
     b              = exercise$b,
     expectedResult = exercise$expectedResult,
+    operator       = exercise$operator,
     solved         = FALSE
   )
 
@@ -58,7 +86,10 @@ shinyServer(function(input, output, session) {
 
   output$equation <- renderText({
     paste(
-      toString(currentExercise$a), " ∙ ", toString(currentExercise$b), " = "
+      toString(currentExercise$a),
+      toString(currentExercise$operator),
+      toString(currentExercise$b),
+      " = "
     )
   })
 
