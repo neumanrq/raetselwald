@@ -6,7 +6,8 @@ new.exercise = function(env) {
   env$x              <- sample(1:10, 1)
   env$y              <- sample(1:10, 1)
   env$z              <- env$x * env$y
-  env$expectedResult <- sample(c(env$x, env$y, env$z))[1]
+  env$sampling       <- sample(c(env$x, env$y, env$z))
+  env$expectedResult <- env$sampling[1]
   env$solved         <- FALSE
 
   env$equation.first <- if (env$expectedResult == env$z) {
@@ -14,7 +15,7 @@ new.exercise = function(env) {
   } else if (env$expectedResult == env$x) {
     env$z
   } else if (env$expectedResult == env$y) {
-    env$y
+    env$z
   }
 
   env$equation.second <- if (env$expectedResult == env$z) {
@@ -54,21 +55,21 @@ shinyServer(function(input, output, session) {
   observeEvent(input$go, {
     newExercise <- new.exercise()
 
-    currentExercise$a              <- newExercise$a
-    currentExercise$b              <- newExercise$b
-    currentExercise$expectedResult <- newExercise$expectedResult
-    currentExercise$solved         <- newExercise$solved
-    currentExercise$operator       <- newExercise$operator
+    currentExercise$equation.first  <- newExercise$equation.first
+    currentExercise$equation.second <- newExercise$equation.second
+    currentExercise$expectedResult  <- newExercise$expectedResult
+    currentExercise$solved          <- newExercise$solved
+    currentExercise$operator        <- newExercise$operator
 
     session %>% updateTextInput("answer", value = "")
   })
 
   currentExercise <- reactiveValues(
-    a              = exercise$a,
-    b              = exercise$b,
-    expectedResult = exercise$expectedResult,
-    operator       = exercise$operator,
-    solved         = FALSE
+    equation.first  = exercise$equation.first,
+    equation.second = exercise$equation.second,
+    expectedResult  = exercise$expectedResult,
+    operator        = exercise$operator,
+    solved          = FALSE
   )
 
   score <- reactiveValues(
@@ -86,9 +87,9 @@ shinyServer(function(input, output, session) {
 
   output$equation <- renderText({
     paste(
-      toString(currentExercise$a),
+      toString(currentExercise$equation.first),
       toString(currentExercise$operator),
-      toString(currentExercise$b),
+      toString(currentExercise$equation.second),
       " = "
     )
   })
