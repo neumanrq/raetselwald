@@ -1,3 +1,7 @@
+if (!require("devtools"))
+  install.packages("devtools")
+devtools::install_github("shiny")
+
 additional_packages = c("shiny", "magrittr")
 
 install_if_missing = function(p) {
