@@ -27,11 +27,11 @@ new.exercise = function(env) {
   }
 
   env$operator <- if (env$expectedResult == env$z) {
-    " ∙ "
+    " ✖️ "
   } else if (env$expectedResult == env$x) {
-    " : "
+    " ➗ "
   } else if (env$expectedResult == env$y) {
-    " : "
+    " ➗ "
   }
 
   env
