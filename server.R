@@ -88,7 +88,7 @@ shinyServer(function(input, output, session) {
   output$equation <- renderText({
     paste(
       toString(currentExercise$equation.first),
-      enc2utf8(toString(currentExercise$operator)),
+      enc2native(toString(currentExercise$operator)),
       toString(currentExercise$equation.second),
       " = "
     )
