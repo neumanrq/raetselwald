@@ -129,12 +129,12 @@ body {
 #equation {
   font-size: 48px;
   float: left;
-  margin: 10px;
+  margin: 20px;
 }
 
 .equation-container {
   margin: 20px;
-  width: 300px;
+  width: 360px;
   margin: 0 auto;
   z-index: 1000;
   position: fixed;
@@ -174,8 +174,11 @@ body {
 }
 
 #answer {
-  font-size: 48px;
-  width: 110px;
-  margin-top: 21px;
-  height: 55px;
+  font-size: 46px;
+  width: 90px;
+  height: 53px;
+  position: fixed;
+  top: 40%;
+  margin-left: 233px;
+  margin-top: 27px;
 } 
