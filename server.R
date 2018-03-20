@@ -1,39 +1,56 @@
 library(shiny)
 library(magrittr)
 
-new.exercise = function(env) {
+new.exercise = function(level = 1) {
   env                <- new.env()
   env$x              <- sample(1:10, 1)
   env$y              <- sample(1:10, 1)
-  env$z              <- env$x * env$y
-  env$sampling       <- sample(c(env$x, env$y, env$z))
-  env$expectedResult <- env$sampling[1]
-  env$solved         <- FALSE
+  env$u              <- env$x + env$y
+  env$v              <- env$x * env$y
 
-  env$equation.first <- if (env$expectedResult == env$z) {
-    env$x
-  } else if (env$expectedResult == env$x) {
-    env$z
-  } else if (env$expectedResult == env$y) {
-    env$z
+  env$sampling.u     <- sample(c(env$x, env$y, env$u))
+  env$sampling.v     <- sample(c(env$x, env$y, env$v))
+
+  env$expectedResult.u <- env$sampling.u[1]
+  env$expectedResult.v <- env$sampling.v[1]
+  env$solved           <- FALSE
+
+  if (level == 1) {
+    env$equation.first    <- env$x
+    env$equation.second   <- env$y
+    env$expectedResult.u  <- env$u
+    env$operator          <- " + "
+  } else {
+     env$equation.first <- if (env$expectedResult.v == env$v) {
+       env$x
+     } else if (env$expectedResult.v == env$x) {
+       env$v
+     } else if (env$expectedResult.v == env$y) {
+       env$v
+     }
+
+     env$equation.second <- if (env$expectedResult.v == env$v) {
+        env$y
+      } else if (env$expectedResult.v == env$x) {
+        env$y
+      } else if (env$expectedResult.v == env$y) {
+        env$x
+      }
+
+    env$operator <- if (env$expectedResult.v == env$v) {
+        " ✖️ "
+      } else if (env$expectedResult.v == env$x) {
+        " ➗ "
+      } else if (env$expectedResult.v == env$y) {
+        " ➗ "
+      }
   }
 
-  env$equation.second <- if (env$expectedResult == env$z) {
-    env$y
-  } else if (env$expectedResult == env$x) {
-    env$y
-  } else if (env$expectedResult == env$y) {
-    env$x
-  }
-
-  env$operator <- if (env$expectedResult == env$z) {
-    " ✖️ "
-  } else if (env$expectedResult == env$x) {
-    " ➗ "
-  } else if (env$expectedResult == env$y) {
-    " ➗ "
-  }
-
+  env$expectedResult <- if (env$operator == " + ") {
+      env$expectedResult.u
+    } else {
+      env$expectedResult.v
+    }
   env
 }
 
@@ -50,10 +67,10 @@ feedback.for <- function(answer, currentExercise) {
 }
 
 shinyServer(function(input, output, session) {
-  exercise <- new.exercise()
+  exercise <- new.exercise(level = 0)
 
   observeEvent(input$go, {
-    newExercise <- new.exercise()
+    newExercise <- new.exercise(level = 1)
 
     currentExercise$equation.first  <- newExercise$equation.first
     currentExercise$equation.second <- newExercise$equation.second
