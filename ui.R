@@ -35,7 +35,7 @@ shinyUI(
       column(12,
         tags$div(class="button-container",
           list(
-            actionLink("go", "Ok, stell' mir die Nächste Aufgabe!")
+            actionLink("go", "Ok, stell' mir die nächste Aufgabe!")
           )
         )
       )
