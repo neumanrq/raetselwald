@@ -21,9 +21,11 @@ shinyUI(
       ),
       column(12,
         tags$div(class="equation-container",
-          list(
-            uiOutput('equation'),
-            textInput("answer", label = NULL)
+          column(10,
+            list(
+              column(8, uiOutput('equation')),
+              column(2, textInput("answer", label = NULL))
+            )
           )
         ),
         tags$div(class = "score-container",
