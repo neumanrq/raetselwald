@@ -1,7 +1,7 @@
 library(shiny)
 library(magrittr)
 
-new.exercise = function(level = 1) {
+new.exercise = function(level = 0) {
   env                <- new.env()
   env$x              <- sample(1:10, 1)
   env$y              <- sample(1:10, 1)
@@ -15,7 +15,7 @@ new.exercise = function(level = 1) {
   env$expectedResult.v <- env$sampling.v[1]
   env$solved           <- FALSE
 
-  if (level == 1) {
+  if (level == 0) {
     env$equation.first    <- env$x
     env$equation.second   <- env$y
     env$expectedResult.u  <- env$u
@@ -67,10 +67,14 @@ feedback.for <- function(answer, currentExercise) {
 }
 
 shinyServer(function(input, output, session) {
-  exercise <- new.exercise(level = 0)
+  score <- reactiveValues(
+    total = 0,
+    level = 0
+  )
+  exercise <- new.exercise(level = isolate(score$level))
 
   observeEvent(input$go, {
-    newExercise <- new.exercise(level = 1)
+    newExercise <- new.exercise(level = score$level)
 
     currentExercise$equation.first  <- newExercise$equation.first
     currentExercise$equation.second <- newExercise$equation.second
@@ -89,15 +93,17 @@ shinyServer(function(input, output, session) {
     solved          = FALSE
   )
 
-  score <- reactiveValues(
-    total = 0
-  )
 
   observeEvent(input$answer, {
     answer <- input$answer
 
     if (answer != '' && (as.numeric(answer) == currentExercise$expectedResult) && (currentExercise$solved == FALSE)) {
-      score$total            <- score$total + 1
+      score$total <- score$total + 1
+
+      if (score$total > 0 && score$total %% 10 == 0) {
+        score$level <- score$level + 1
+      }
+
       currentExercise$solved <- TRUE
     }
   })
