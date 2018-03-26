@@ -1,56 +1,62 @@
 library(shiny)
 library(magrittr)
 
-new.exercise = function(level = 0) {
+
+multiplicationExercise.new <- function() {
   env                <- new.env()
   env$x              <- sample(1:10, 1)
   env$y              <- sample(1:10, 1)
-  env$u              <- env$x + env$y
   env$v              <- env$x * env$y
+  env$sampling       <- sample(c(env$x, env$y, env$v))
+  env$expectedResult <- env$sampling[1]
+  env$solved         <- FALSE
 
-  env$sampling.u     <- sample(c(env$x, env$y, env$u))
-  env$sampling.v     <- sample(c(env$x, env$y, env$v))
-
-  env$expectedResult.u <- env$sampling.u[1]
-  env$expectedResult.v <- env$sampling.v[1]
-  env$solved           <- FALSE
-
-  if (level == 0) {
-    env$equation.first    <- env$x
-    env$equation.second   <- env$y
-    env$expectedResult.u  <- env$u
-    env$operator          <- " + "
-  } else {
-     env$equation.first <- if (env$expectedResult.v == env$v) {
-       env$x
-     } else if (env$expectedResult.v == env$x) {
-       env$v
-     } else if (env$expectedResult.v == env$y) {
-       env$v
-     }
-
-     env$equation.second <- if (env$expectedResult.v == env$v) {
-        env$y
-      } else if (env$expectedResult.v == env$x) {
-        env$y
-      } else if (env$expectedResult.v == env$y) {
-        env$x
-      }
-
-    env$operator <- if (env$expectedResult.v == env$v) {
-        " ✖️ "
-      } else if (env$expectedResult.v == env$x) {
-        " ➗ "
-      } else if (env$expectedResult.v == env$y) {
-        " ➗ "
-      }
+  env$equation.first <- if (env$expectedResult == env$v) {
+    env$x
+  } else if (env$expectedResult == env$x) {
+    env$v
+  } else if (env$expectedResult == env$y) {
+    env$v
   }
 
-  env$expectedResult <- if (env$operator == " + ") {
-      env$expectedResult.u
-    } else {
-      env$expectedResult.v
-    }
+  env$equation.second <- if (env$expectedResult == env$v) {
+    env$y
+  } else if (env$expectedResult == env$x) {
+    env$y
+  } else if (env$expectedResult == env$y) {
+    env$x
+  }
+
+  env$operator <- if (env$expectedResult == env$v) {
+    " ✖️ "
+  } else if (env$expectedResult == env$x) {
+    " ➗ "
+  } else if (env$expectedResult == env$y) {
+    " ➗ "
+  }
+
+  env
+}
+
+additionExercise.new <- function() {
+  env                 <- new.env()
+  env$x               <- sample(1:10, 1)
+  env$y               <- sample(1:10, 1)
+  env$expectedResult  <- env$x + env$y
+  env$solved          <- FALSE
+  env$equation.first  <- env$x
+  env$equation.second <- env$y
+  env$operator        <- " + "
+  env
+}
+
+new.exercise = function(level = 0) {
+  env <- if (level == 0) {
+    additionExercise.new()
+  } else {
+    multiplicationExercise.new()
+  }
+
   env
 }
 
