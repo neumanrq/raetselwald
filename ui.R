@@ -22,7 +22,7 @@ shinyUI(
       column(12,
         tags$div(class="equation-container",
           list(
-            textOutput("equation"),
+            uiOutput('equation'),
             textInput("answer", label = NULL)
           )
         ),

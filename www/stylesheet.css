@@ -134,11 +134,11 @@ body {
 
 .equation-container {
   margin: 20px;
-  width: 360px;
+  width: 420px;
   margin: 0 auto;
   z-index: 1000;
   position: fixed;
-  top: 40%;
+  top: 25%;
   left: 40%;
   background-color: white;
   opacity: 0.85;
@@ -146,6 +146,14 @@ body {
   border-radius: 10px;
 }
 
+#answer {
+  font-size: 46px;
+  width: 90px;
+  height: 53px;
+  position: relative;
+  top: -125px;
+  margin-left: 260px;
+}
 .score-container {
   margin: 20px;
   font-size: 4em;
@@ -160,7 +168,7 @@ body {
 }
 
 .button-container {
-  position: fixed; 
+  position: fixed;
   bottom: 10%;
   right: 10%;
   z-index: 15;
@@ -172,13 +180,3 @@ body {
   font-size: 28px;
   width: 50px;
 }
-
-#answer {
-  font-size: 46px;
-  width: 90px;
-  height: 53px;
-  position: fixed;
-  top: 40%;
-  margin-left: 233px;
-  margin-top: 27px;
-} 

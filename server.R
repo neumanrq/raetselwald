@@ -28,11 +28,11 @@ multiplicationExercise.new <- function() {
   }
 
   env$operator <- if (env$expectedResult == env$v) {
-    " ✖️ "
+    "\\cdot"
   } else if (env$expectedResult == env$x) {
-    " ➗ "
+    ":"
   } else if (env$expectedResult == env$y) {
-    " ➗ "
+    ": "
   }
 
   env
@@ -51,7 +51,7 @@ additionExercise.new <- function() {
 }
 
 new.exercise = function(level = 0) {
-  env <- if (level == 0) {
+  env <- if (level == 1) {
     additionExercise.new()
   } else {
     multiplicationExercise.new()
@@ -114,13 +114,17 @@ shinyServer(function(input, output, session) {
     }
   })
 
-  output$equation <- renderText({
-    paste(
+  output$equation <- renderUI({
+    formula <- paste(
+      "$$\\",
       toString(currentExercise$equation.first),
       enc2native(toString(currentExercise$operator)),
       toString(currentExercise$equation.second),
-      " = "
+      " = ",
+      "$$"
     )
+
+    withMathJax(helpText(formula))
   })
 
   output$response <- renderText({
