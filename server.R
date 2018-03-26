@@ -62,7 +62,7 @@ new.exercise = function(level = 0) {
 
 feedback.for <- function(answer, currentExercise) {
   if ((answer == '') && (currentExercise$solved == FALSE)) {
-    "Schuuhuu! Ich habe eine neue Aufgabe für dich:"
+    "Schuhuuu! Diese Aufgabe habe ich gerade eben im Wald aufgeschnappt:"
   } else if ((answer != '') && (currentExercise$solved == FALSE)) {
     "Hhhhm… da stimmt was noch nicht! Du kommst bestimmt gleich drauf."
   } else if (currentExercise$solved == TRUE) {
