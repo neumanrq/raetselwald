@@ -99,7 +99,6 @@ shinyServer(function(input, output, session) {
     solved          = FALSE
   )
 
-
   observeEvent(input$answer, {
     answer <- input$answer
 
@@ -114,17 +113,22 @@ shinyServer(function(input, output, session) {
     }
   })
 
-  output$equation <- renderUI({
-    formula <- paste(
+  equation <- function(exercise) {
+    paste(
       "$$\\",
-      toString(currentExercise$equation.first),
-      enc2native(toString(currentExercise$operator)),
-      toString(currentExercise$equation.second),
+      toString(exercise$equation.first),
+      enc2native(toString(exercise$operator)),
+      toString(exercise$equation.second),
       " = ",
       "$$"
     )
+  }
 
-    withMathJax(helpText(formula))
+  output$equation <- renderUI({
+    currentExercise %>%
+    equation %>%
+    helpText %>%
+    withMathJax
   })
 
   output$response <- renderText({
@@ -132,9 +136,9 @@ shinyServer(function(input, output, session) {
   })
 
   output$score <- renderText({
-    paste(
-      toString(score$total), " Punkt(e)"
-    )
+    score$total %>%
+    toString %>%
+    paste(" Punkt(e)")
   })
 
 })
